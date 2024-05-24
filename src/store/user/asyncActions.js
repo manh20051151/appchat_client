@@ -3,7 +3,7 @@ import * as apis from '../../apis'
 
 export const getCurrent = createAsyncThunk('user/', async (data, {rejectWithValue})=>{
     const response = await apis.apiGetCurrent()
-    console.log(response);
+    console.log("responseresponseresponse: ", response);
     if(!response.success){
         return rejectWithValue(response)
     }

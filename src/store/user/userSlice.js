@@ -18,9 +18,11 @@ export const userSlide = createSlice({
             state.token = action.payload.token
         },
         logout: (state, action)=>{
-
             state.isLoggedIn = false
+            state.current = null
             state.token = null
+            state.isLoading = false
+            state.mes = ''
         },
         clearMessage: (state)=>{
             state.mes = ''

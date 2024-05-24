@@ -8,11 +8,13 @@ import path from '../../ultils/path';
 import {register} from '../../store/user/userSlice'
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { useAuthContext } from '../../context/AuthContext';
 
 const Login = () => {
     
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const {setAuthUser } = useAuthContext()
     // const location = useLocation()
 
     const [isForgotPassword, setisForgotPassword] = useState(false)
@@ -59,8 +61,11 @@ const Login = () => {
         }
         else{
             const rs = await apiLogin(data)
+
+            // navigate(`/${path.HOME}`)
             if(rs.success){
                 dispatch(register({isLoggedIn: true, token: rs.accessToken, userData: rs.userData}))
+                setAuthUser(rs.userData);
                 navigate(`/${path.HOME}`)
             } else{
                 Swal.fire('Đăng nhập không thành công', rs.mes ,'error' )
@@ -74,9 +79,10 @@ const Login = () => {
     return (
             
             <div className="login-container inline-flex ">
-                {isForgotPassword && <div className='absolute top-0 left-0 bottom-0 right-0 bg-white items-center flex flex-col'>
+                {isForgotPassword && <div className='absolute top-0 left-0 bottom-0 right-0 bg-white items-center flex flex-col z-10'>
+                    <div className='text-[50px] p-10 font-bold'>Cập nhật lại mật khẩu</div>
                     <div className='flex flex-col gap-4'>
-                        <label htmlFor='usename'>Nhập email: </label>
+                        <label htmlFor='usename'>Nhập email để cập nhật lại mật khẩu: </label>
                         <input 
                             type='text'
                             id='usename'

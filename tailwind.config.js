@@ -8,10 +8,12 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor:{
-        overlay: 'rgba(0,0,0,0.3)',
+        overlay: 'rgba(0,0,0,0.7)',
       }
         
     },
   },
-  plugins: [],
+  plugins: [require("daisyui"),
+  require('@tailwindcss/forms'),
+  ],
 }
